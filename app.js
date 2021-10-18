@@ -5,6 +5,7 @@ const exphs = require("express-handlebars");
 const bodyParser = require("body-parser");
 require("./models");
 const postRoute = require("./routes/posts");
+const userRoute = require("./routes/user");
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use(bodyParser.json());
 
 const port = 8000;
 
+app.get("/", (req, res) => {
+  res.send("Blog Site");
+});
 // app.engine("handlebars", exphs());
 // app.set("view engine", "handlebars");
 // app.use(express.static(path.join(__dirname, "public")));
@@ -22,6 +26,7 @@ const port = 8000;
 // });
 
 app.use("/posts", postRoute);
+app.use("/user", userRoute);
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
