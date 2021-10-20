@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 require("./models");
 const postRoute = require("./routes/posts");
 const userRoute = require("./routes/user");
-
+const imageRoute = require("./routes/images");
 const app = express();
 
 app.use(bodyParser.json());
@@ -27,6 +27,8 @@ app.get("/", (req, res) => {
 
 app.use("/posts", postRoute);
 app.use("/user", userRoute);
+app.use("/images", imageRoute);
+app.use("/uploads", express.static("uploads"));
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });

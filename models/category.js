@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
     },
-    {}
+    {
+      timestamp: true,
+      underscored: true,
+    }
   );
   Category.associate = function (models) {
     // associations can be defined here

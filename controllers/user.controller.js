@@ -1,6 +1,9 @@
 const models = require("../models");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// require("../nodemon.json");
+require("dotenv").config();
+// require(__filename + "../")[env];
 
 function signup(req, res) {
   models.User.findOne({ where: { email: req.body.email } })
@@ -41,6 +44,46 @@ function signup(req, res) {
     });
 }
 
+function login(req, res) {
+  models.User.findOne({ where: { email: req.body.email } })
+    .then((user) => {
+      if (user === null) {
+        res.status(404).json({
+          message: "User Not Found",
+        });
+      } else {
+        bcryptjs.compare(req.body.password, user.password, (error, result) => {
+          if (result) {
+            const token = jwt.sign(
+              {
+                email: user.email,
+                userId: user.id,
+              },
+              process.env.JWT_KEY,
+              // { expiresIn: "2 seconds" },
+              (error, token) => {
+                res.status(200).json({
+                  message: "Authentication successfully",
+                  token: token,
+                });
+              }
+            );
+          } else {
+            res.status(401).json({
+              message: "Invalid Credentials",
+            });
+          }
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Something Wrong",
+      });
+    });
+}
+
 module.exports = {
   signup: signup,
+  login: login,
 };
