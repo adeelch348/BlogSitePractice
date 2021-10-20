@@ -5,15 +5,23 @@ module.exports = {
     return queryInterface.bulkInsert("Categories", [
       {
         name: "Nodejs",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: "JavaScript",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: "PHP",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         name: "Laravel",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },

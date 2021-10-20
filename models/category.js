@@ -6,8 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
     },
     {
-      timestamp: true,
-      underscored: true,
+      // timestamps: true,
+      // underscored: true,
+      // freezeTableName: true,
     }
   );
   Category.associate = function (models) {
