@@ -52,7 +52,7 @@ function login(req, res) {
           message: "User Not Found",
         });
       } else {
-        bcryptjs.compare(req.body.password, user.password, (error, result) => {
+        bcryptjs.compare(req.body.password, user.password, (_error, result) => {
           if (result) {
             const token = jwt.sign(
               {
@@ -65,6 +65,7 @@ function login(req, res) {
                 res.status(200).json({
                   message: "Authentication successfully",
                   token: token,
+                  name: user.name,
                 });
               }
             );
