@@ -13,8 +13,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/login" component={Login} />
+          <Route path="/dashboard">
+            <ProtectedRoute Cmp={Dashboard} />
+          </Route>
+          <Route exact path="/login">
+            <ProtectedRoute Cmp={Login} />
+          </Route>
           <Route exact path="*" component={NotFound} />
           {/* <ProtectedRoute
           path="/dashboard"

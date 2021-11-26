@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { useHistory } from "react-router-dom";
 import Header from "./Header";
@@ -6,12 +6,6 @@ const Login = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [message, setMessage] = useState("");
-  useEffect(() => {
-    if (localStorage.getItem("Token")) {
-      history.push("./dashboard");
-    }
-  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,12 +49,6 @@ const Login = () => {
         <div className="App-header">
           <form onSubmit={handleSubmit}>
             <h3>Login</h3>
-            <h2>
-              {/* onChange=
-            {(e) => {
-              setMessage(e.target.value);
-            }} */}
-            </h2>
             <div className="form-group">
               <input
                 type="email"

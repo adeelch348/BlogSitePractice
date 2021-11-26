@@ -1,20 +1,20 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-const ProtectedRoute = ({ isAuth, component: Component, ...rest }) => {
+const ProtectedRoute = (props) => {
+  let Cmp = props.Cmp;
+  let history = useHistory();
+  useEffect(() => {
+    if (localStorage.getItem("Token")) {
+      history.push("./dashboard");
+    } else {
+      history.push("./login");
+    }
+  }, []);
   return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (isAuth) {
-          return <Component />;
-        } else {
-          return (
-            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-          );
-        }
-      }}
-    />
+    <div>
+      <Cmp />
+    </div>
   );
 };
 
